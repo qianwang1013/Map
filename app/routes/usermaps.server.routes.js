@@ -9,6 +9,7 @@ module.exports = function(app) {
 		.get(usermaps.list)
 		.post(users.requiresLogin, usermaps.create);
 
+	app.route('/usermaps/getCoord').post(usermaps.getCoord);
 	app.route('/usermaps/:usermapId')
 		.get(usermaps.read)
 		.put(users.requiresLogin, usermaps.hasAuthorization, usermaps.update)

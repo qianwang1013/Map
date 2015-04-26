@@ -25,20 +25,20 @@ var UsermapSchema = new Schema({
 		ref: 'User'
 	},
 	lat:{
-		type: string,
+		type: Number,
 		default: ''
 	},
-	long:{
-		type:string,
+	lng:{
+		type:Number,
 		default:''
 	},
 	locationName:{
-		type:string,
+		type: String,
 		default:'',
 		trim:true
 	},
 	locationNote:{
-		type:string,
+		type: String,
 		default:'',
 		trim:true
 	}

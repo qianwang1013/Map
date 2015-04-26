@@ -105,3 +105,24 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+exports.getCoord = function(req,res){
+	Usermap.find().sort('-created').populate('user', 'displayName').exec(function(err, usermaps) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			var coord = [];
+
+			for(var i = 0; i !== usermaps.length; ++i){
+				coord.push({
+						lat: usermaps[i].lat,
+						lng: usermaps[i].lng
+					});
+			}
+			console.log(coord);
+			res.jsonp(coord);
+		}
+	});
+};

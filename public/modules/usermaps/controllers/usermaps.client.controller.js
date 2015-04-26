@@ -1,15 +1,17 @@
 'use strict';
 
 // Usermaps controller
-angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps',
-	function($scope, $stateParams, $location, Authentication, Usermaps) {
+angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','$http',
+	function($scope, $stateParams, $location, Authentication, Usermaps, $http) {
 		$scope.authentication = Authentication;
 
 		// Create new Usermap
 		$scope.create = function() {
 			// Create new Usermap object
 			var usermap = new Usermaps ({
-				name: this.name
+				name: this.name,
+				lat: this.lat,
+				lng: this.lng
 			});
 
 			// Redirect after save
@@ -56,6 +58,21 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 			$scope.usermaps = Usermaps.query();
 		};
 
+		$scope.getCoord = function(){
+			$http.post('/usermaps/getCoord').success(function (res) {
+				$scope.markers = [];
+				for(var i = 0; i !== res.length; ++i){
+					$scope.markers.push({
+						lat: res[i].lat,
+						lng: res[i].lng
+					});
+				}
+				console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
+			}).error(function (response) {
+				console.log(response);
+			});
+		};
+
 		// Find existing Usermap
 		$scope.findOne = function() {
 			$scope.usermap = Usermaps.get({ 
@@ -64,29 +81,13 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		};
 
 
-
-		//leaflet setups
-		$scope.latitude = 29.6520;
-		$scope.longitude = -82.3250;
-		angular.extend($scope, {
-			center: {
+		$scope.leaflet_setup = function(){
+			$scope.center = {
 				lat: 29.6520,
 				lng: -82.3250,
 				zoom: 12
-			},
-			markers: {
-				test: {
-					lat: $scope.latitude,
-					lng: $scope.longitude,
-					title: 'Testing bold'.bold(),
-					message: 'Click here'.link('http://www.w3schools.com'),
-					focus: false,
-					draggable: false
-				}
-			},
-			defaults: {
-				scrollWheelZoom: false
-			}
-		});
+			};
+		};
+
 	}
 ]);
