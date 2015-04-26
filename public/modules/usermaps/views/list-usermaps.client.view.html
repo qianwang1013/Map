@@ -1,34 +1,34 @@
 <section data-ng-controller="UsermapsController" data-ng-init="find(); getCoord(); leaflet_setup()">
     <div class="page-header">
-        <h1>List</h1>
+        <h1>List
+            <a href = "/#!/usermaps/create"><span class = "glyphicon glyphicon-pencil pull-right"></span></a>
+        </h1>
     </div>
-    <a href = "/#!/usermaps/create"><span class = "glyphicon glyphicon-pencil"></span></a>
-    <leaflet height="480px" width=100% markers = "markers" center = "center"></leaflet>
-    <div class="list-group">
-        <a data-ng-repeat="usermap in usermaps" data-ng-href="#!/usermaps/{{usermap._id}}" class="list-group-item">
-			Latitude:
-            <span data-ng-bind = "usermap.lat"></span>
-            Longitude:
-            <span data-ng-bind = "usermap.lng"></span>
-            <br>
-            <small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="usermap.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="usermap.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="usermap.name"></h4>
-        </a>
-    </div>
+    <div class = "row">
+        <div class = "col-mid-12 col-xs-8">
+            <leaflet height="480px" width=100% markers = "markers" center = "center"></leaflet>
+        </div>
+        <div class = "col-mid-12 col-xs-4">
+            <div class="list-group">
+                <a data-ng-repeat="usermap in usermaps" data-ng-href="#!/usermaps/{{usermap._id}}" class="list-group-item">
+                    Latitude:
+                    <span data-ng-bind = "usermap.lat"></span>
+                    Longitude:
+                    <span data-ng-bind = "usermap.lng"></span>
+                    <br>
+                    <small class="list-group-item-text">
+                        Posted on
+                        <span data-ng-bind="usermap.created | date:'medium'"></span>
+                        by
+                        <span data-ng-bind="usermap.user.displayName"></span>
+                    </small>
+                    <h4 class="list-group-item-heading" data-ng-bind="usermap.name"></h4>
+                </a>
+            </div>
+        </div>
 
-    <div class = "list-group">
-        <span data-ng-repeat = "lats in lat">
-            {{lats}}
-        </span>
-        <span data-ng-repeat = "lngs in lng">
-            {{lngs}}
-        </span>
-    </div>
+    <div class = "row">
+
     <div class="alert alert-warning text-center" data-ng-hide="!usermaps.$resolved || usermaps.length">
     	No Usermaps yet, why don't you <a href="/#!/usermaps/create">create one</a>?
     </div>

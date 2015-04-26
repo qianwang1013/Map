@@ -121,7 +121,7 @@ exports.getCoord = function(req,res){
 						lng: usermaps[i].lng
 					});
 			}
-			console.log(coord);
+/*			console.log(coord);*/
 			res.jsonp(coord);
 		}
 	});
