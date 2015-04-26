@@ -1,14 +1,14 @@
 <section data-ng-controller="UsermapsController" data-ng-init="find(); getCoord(); leaflet_setup()">
     <div class="page-header">
         <h1>List
-            <a href = "/#!/usermaps/create"><span class = "glyphicon glyphicon-pencil pull-right"></span></a>
+            <a href = "/#!/usermaps/create" data-ng-show = authentication.user><span class = "glyphicon glyphicon-pencil pull-right"></span></a>
         </h1>
     </div>
     <div class = "row">
-        <div class = "col-mid-12 col-xs-8">
+        <div class = "col-md-8 col-xs-8">
             <leaflet height="480px" width=100% markers = "markers" center = "center"></leaflet>
         </div>
-        <div class = "col-mid-12 col-xs-4">
+        <div class = "col-md-4 col-xs-4" data-ng-show = authentication.user>
             <div class="list-group">
                 <a data-ng-repeat="usermap in usermaps" data-ng-href="#!/usermaps/{{usermap._id}}" class="list-group-item">
                     Latitude:
@@ -25,6 +25,10 @@
                     <h4 class="list-group-item-heading" data-ng-bind="usermap.name"></h4>
                 </a>
             </div>
+        </div>
+        <div class = "col-md-4 col-xs-4" data-ng-hide = authentication.user>
+            <p><h4>Not a user yet</h4></p>
+            <p><a href = "/#!/signup" ui-route = "/#!/signup" >Sign up</a> and add your maker on HandsOn Map</p>
         </div>
 
     <div class = "row">
