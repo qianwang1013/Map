@@ -32,15 +32,18 @@ var UsermapSchema = new Schema({
 		type:Number,
 		default:''
 	},
-	locationName:{
+	description:{
 		type: String,
-		default:'',
-		trim:true
+		default: ''
 	},
-	locationNote:{
+	notes:{
 		type: String,
-		default:'',
-		trim:true
+		default: ''
+	},
+	link:{
+		type: String,
+		default: '',
+		trim: true
 	}
 });
 

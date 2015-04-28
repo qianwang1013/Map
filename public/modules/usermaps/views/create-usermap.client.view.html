@@ -3,7 +3,7 @@
         <h1>New Usermap</h1>
     </div>
     <div class="row">
-        <div class = "col-mid-12 col-xs-8">
+        <div class = "col-md-12 col-xs-8">
             <leaflet width="100%" height="480px" markers = "markers" center = "center"></leaflet>
         </div>
 
@@ -18,8 +18,17 @@
                         <input type = "text" id = "longitude" data-ng-model = "lng" placeholder="longitude" class = "form-control"/>
                         Latitude:
                         <input type = "text" id = "latitude" data-ng-model = "lat" placeholder="latitude" class = "form-control"/>
-                        <br/>
-
+                        Notes:
+                        <input type = "text" id = "notes" data-ng-model = "notes" placeholder = "notes" class = "form-control"/>
+                        Link:
+                        <input type = "url" id = "link" data-ng-model = "link" placeholder = "hyperlink" class = "form-control"/>
+                        Description:
+                        <textarea data-ng-model="description" name="description" id="description" class="form-control" cols="30" rows="10" placeholder="description"></textarea>
+                        Marker Category:
+                        <select data-ng-model="category" id="category" name="category" class="form-control">
+                            <option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === ''" value="{{category_name}}">{{category_name}}</option>
+                            <option value="New Category"> --- New Category --- </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default">

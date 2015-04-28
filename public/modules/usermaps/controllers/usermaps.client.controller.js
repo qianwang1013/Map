@@ -11,7 +11,10 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 			var usermap = new Usermaps ({
 				name: this.name,
 				lat: this.lat,
-				lng: this.lng
+				lng: this.lng,
+				description: this.description,
+				notes: this.notes,
+				link: this.link
 			});
 
 			// Redirect after save
