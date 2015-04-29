@@ -70,9 +70,9 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 						lng: res[i].lng
 					});
 				}
-				console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
+				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
 			}).error(function (response) {
-				console.log(response);
+				//console.log(response);
 			});
 		};
 
