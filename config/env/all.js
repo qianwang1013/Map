@@ -15,7 +15,10 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/leaflet/dist/leaflet.css'
+				'public/lib/leaflet/dist/leaflet.css',
+				'public/lib/leaflet.markercluster/dist/MarkerCluster.css',
+				'public/lib/leaflet.markercluster/dist/MarkerCluster.Default.css'
+				
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -25,7 +28,8 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/leaflet/dist/leaflet.js',
-				'public/lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js'
+				'public/lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js',
+				'public/lib/leaflet.markercluster/dist/leaflet.markercluster.js'
 			]
 		},
 		css: [

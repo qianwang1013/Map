@@ -118,10 +118,12 @@ exports.getCoord = function(req,res){
 			for(var i = 0; i !== usermaps.length; ++i){
 				coord.push({
 						lat: usermaps[i].lat,
-						lng: usermaps[i].lng
+						lng: usermaps[i].lng,
+						layer: usermaps[i].category
 					});
+				console.log(usermaps[i].category);
 			}
-/*			console.log(coord);*/
+			console.log(coord);
 			res.jsonp(coord);
 		}
 	});

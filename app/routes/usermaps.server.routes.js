@@ -9,7 +9,7 @@ module.exports = function(app) {
 		.get(usermaps.list)
 		.post(users.requiresLogin, usermaps.create);
 	app.route('/usermaps/getCategory').post(usermaps.getCategory);
-	app.route('/usermaps/getCoord').post(usermaps.getCoord, usermaps.getCategory);
+	app.route('/usermaps/getCoord').post(usermaps.getCoord);
 	app.route('/usermaps/:usermapId')
 		.get(usermaps.read)
 		.put(users.requiresLogin, usermaps.hasAuthorization, usermaps.update)
