@@ -44,6 +44,11 @@ var UsermapSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
+	},
+	category:{
+		type: String,
+		default: '',
+		trim: true
 	}
 });
 

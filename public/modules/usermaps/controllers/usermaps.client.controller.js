@@ -7,6 +7,9 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 
 		// Create new Usermap
 		$scope.create = function() {
+			if(this.new_category !== '' && this.category === 'New Category'){
+				this.category = this.new_category;
+			}
 			// Create new Usermap object
 			var usermap = new Usermaps ({
 				name: this.name,
@@ -14,7 +17,8 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				lng: this.lng,
 				description: this.description,
 				notes: this.notes,
-				link: this.link
+				link: this.link,
+				category: this.category
 			});
 
 			// Redirect after save
@@ -76,6 +80,20 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 			});
 		};
 
+
+		$scope.getCategory = function(){
+			$http.post('/usermaps/getCategory').success(function (res) {
+				$scope.categoryList = [];
+				for(var i = 0; i !== res.length; ++i){
+					$scope.categoryList.push(
+						res[i]
+					);
+				}
+				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
+			}).error(function (response) {
+				//console.log(response);
+			});
+		};
 		// Find existing Usermap
 		$scope.findOne = function() {
 			$scope.usermap = Usermaps.get({ 

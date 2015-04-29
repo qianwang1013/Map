@@ -61,4 +61,6 @@ describe('Usermap Model Unit Tests:', function() {
 
 		done();
 	});
+
 });
+

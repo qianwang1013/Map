@@ -1,4 +1,4 @@
-<section data-ng-controller="UsermapsController" data-ng-init = "getCoord(); leaflet_setup()">
+<section data-ng-controller="UsermapsController" data-ng-init = "getCoord(); leaflet_setup(); getCategory()">
     <div class="page-header">
         <h1>New Usermap</h1>
     </div>
@@ -26,9 +26,10 @@
                         <textarea data-ng-model="description" name="description" id="description" class="form-control" cols="30" rows="10" placeholder="description"></textarea>
                         Marker Category:
                         <select data-ng-model="category" id="category" name="category" class="form-control">
-                            <option data-ng-repeat="category_name in getCategoryArr(podcasts)" data-ng-hide="category_name === ''" value="{{category_name}}">{{category_name}}</option>
-                            <option value="New Category"> --- New Category --- </option>
+                        <option data-ng-repeat = "category_name in categoryList" data-ng-hide="categoryList.length === 0 && category_name = ''" value="{{category_name}}">{{category_name}}</option>
+                        <option value="New Category"> --- New Category --- </option>
                         </select>
+                         <input data-ng-show="category ==='New Category'" class="form-control" type="text" id = "new_category" data-ng-model="new_category" placeholder="New Category" />
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-default">

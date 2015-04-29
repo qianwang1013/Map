@@ -126,3 +126,31 @@ exports.getCoord = function(req,res){
 		}
 	});
 };
+
+exports.getCategory = function(req, res){
+	console.log('here');
+	Usermap.find().sort('-created').populate('user','displayName').exec(function(err,usermaps){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			var categoryList = [];
+			var temp = '';
+			//inserting the first category string for compare purpose
+
+			for(var i = 0; i !== usermaps.length; ++i){
+				temp = usermaps[i].category;
+				if(usermaps[i].category !== '' && categoryList.indexOf(temp) === -1){
+					categoryList.push(
+						temp
+					);
+				}
+			}
+/*			console.log(coord);*/
+			console.log('test category');
+			console.log(categoryList);
+			res.jsonp(categoryList);
+		}
+	});
+};
