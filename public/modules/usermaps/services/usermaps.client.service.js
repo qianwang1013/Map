@@ -12,6 +12,17 @@ angular.module('usermaps').factory('Usermaps', ['$resource',
 	}
 ]);
 
+angular.module('usermaps').factory('Comment',['$resource',
+	function($recourse){
+		return $recourse('comment',{},
+			{
+			update:{
+				method: 'PUT'
+			}
+		});
+	}
+]);
+
 angular.module('usermaps').factory('Category', ['$resource',
 	function($resource){
 		var obj = $resource('/usermaps/getCategory');

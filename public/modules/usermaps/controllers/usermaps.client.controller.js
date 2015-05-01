@@ -3,7 +3,7 @@
 // Usermaps controller
 angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','Category','$http',
 	function($scope, $stateParams, $location, Authentication, Usermaps, test_Category, $http) {
-		console.log(test_Category);
+	/*	console.log(test)*/
 		$scope.authentication = Authentication;
 		$scope.center = {
 				lat: 29.6520,

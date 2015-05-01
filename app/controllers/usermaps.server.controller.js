@@ -123,14 +123,14 @@ exports.getCoord = function(req,res){
 					});
 				console.log(usermaps[i].category);
 			}
-			console.log(coord);
+/*			console.log(coord);*/
 			res.jsonp(coord);
 		}
 	});
 };
 
 exports.getCategory = function(req, res){
-	console.log('here');
+/*	console.log('here');*/
 	Usermap.find().sort('-created').populate('user','displayName').exec(function(err,usermaps){
 		if (err) {
 			return res.status(400).send({
@@ -150,8 +150,8 @@ exports.getCategory = function(req, res){
 				}
 			}
 /*			console.log(coord);*/
-			console.log('test category');
-			console.log(categoryList);
+/*			console.log('test category');
+			console.log(categoryList);*/
 			res.jsonp(categoryList);
 		}
 	});
