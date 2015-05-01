@@ -1,10 +1,16 @@
 'use strict';
 
 // Usermaps controller
-angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','$http',
-	function($scope, $stateParams, $location, Authentication, Usermaps, $http) {
+angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','Category','$http',
+	function($scope, $stateParams, $location, Authentication, Usermaps, test_Category, $http) {
+		console.log(test_Category);
 		$scope.authentication = Authentication;
-
+		$scope.center = {
+				lat: 29.6520,
+				lng: -82.3250,
+				zoom: 12
+			};
+		$scope.layers = {};
 		// Create new Usermap
 		$scope.create = function() {
 			if(this.new_category !== '' && this.category === 'New Category'){
@@ -74,7 +80,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 					$scope.markers.push({
 						lat: res[i].lat,
 						lng: res[i].lng,
-						layer: 'Science'
+						layer: res[i].layer
 					});
 					
 				}
@@ -87,12 +93,39 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 
 		$scope.getCategory = function(){
 			$http.post('/usermaps/getCategory').success(function (res) {
-				$scope.categoryList = [];
+			$scope.categoryList = [];
 				for(var i = 0; i !== res.length; ++i){
 					$scope.categoryList.push(
 						res[i]
 					);
 				}
+
+			$scope.layers.baselayers = [];
+			$scope.layers.baselayers = 
+			{
+            	mapbox_light: {
+                    name: 'Mapbox Light',
+                    url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    type: 'xyz',
+                    layerOptions: {
+                        apikey: 'pk.eyJ1IjoiYnVmYW51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q',
+                        mapid: 'bufanuvols.lia22g09'
+                        }
+                    }			
+            };
+			$scope.layers.overlays = [];
+			//add layers
+			$scope.test_layers = ['Science', 'Foo'];
+			angular.forEach($scope.categoryList, function(value){
+				$scope.layers.overlays[value] = 
+					 {
+						name: value,
+						type: 'markercluster',
+						visible: true					
+					};
+			});
+
+			console.log($scope.layers);
 				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
 			}).error(function (response) {
 				//console.log(response);
@@ -104,43 +137,5 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				usermapId: $stateParams.usermapId
 			});
 		};
-
-
-		$scope.leaflet_setup = function(){
-			$scope.center = {
-				lat: 29.6520,
-				lng: -82.3250,
-				zoom: 12
-			};
-
-			$scope.layers = {
-                   baselayers: {
-                        mapbox_light: {
-                            name: 'Mapbox Light',
-                            url: 'http://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
-                            type: 'xyz',
-                            layerOptions: {
-                                apikey: 'pk.eyJ1IjoiYnVmYW51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q',
-                                mapid: 'bufanuvols.lia22g09'
-                            }
-                        }
-                    },
-                    overlays: {
-                        Science: {
-                            name: 'Science',
-                            type: 'markercluster',
-                            visible: true
-                        },
-                        Else: {
-                        	name: '',
-                        	type: 'markercluster',
-                        	visible: true
-                        }
-                    }			
-			};
-		};
-
-
-
 	}
 ]);

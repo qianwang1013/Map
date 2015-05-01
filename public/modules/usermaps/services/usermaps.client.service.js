@@ -11,3 +11,11 @@ angular.module('usermaps').factory('Usermaps', ['$resource',
 		});
 	}
 ]);
+
+angular.module('usermaps').factory('Category', ['$resource',
+	function($resource){
+		var obj = $resource('/usermaps/getCategory');
+		console.log('I really want to know obj: ' + obj);
+		return obj;
+	}
+]);
