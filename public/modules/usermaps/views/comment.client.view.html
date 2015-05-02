@@ -1,3 +1,27 @@
-<section data-ng-controller="UsermapsController">
+<section data-ng-controller="CommentController">
+        <div class = "col-md-12 col-xs-8 viewcomment" data-ng-show = authentication.user data-ng-init = "find()">
+            <div class="list-group">
+                <div data-ng-repeat="comment in comments" class="list-group-item">
+                    <h4  data-ng-bind="comment.user.displayName"></h4>
+                    Comment:
+                    <span data-ng-bind = comment.comment class = "text-muted"></span><br/>
+                    <small class="list-group-item-text">
+                        Posted on
+                        <span data-ng-bind="comment.created | date:'medium'"></span>
+                        by
+                        <span data-ng-bind="comment.user.displayName"></span>
+                    </small>
+                    <!-- Replying button only shows when there is a login user and is not the same as the comment post user -->
+                    <br/>
+                    <button class = "btn btn-default" value = "reply" data-ng-show = "((authentication.user) && (authentication.user._id !== comment.user._id))">reply</button>
+                </div>
+            </div>
 
+                <div class="col-xs-push-3">
+                    <input type = "text" data-ng-model = "comment" id = "comment" class="form-control" placeholder="comment here"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default" data-ng-click = "create()">
+                </div>
+        </div>
 </section>

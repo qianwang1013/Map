@@ -30,3 +30,7 @@ angular.module('usermaps').factory('Category', ['$resource',
 		return obj;
 	}
 ]);
+
+angular.module('usermaps').directive('jScroll',['',
+	
+]);

@@ -13,3 +13,29 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+body{
+	background-color: #C7D0D5;
+}
+.navbar-red {
+  background-color: #EF6D3B;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
+}
+.navbar-red .navbar-nav > .open > a,
+.navbar-red .navbar-nav > .active > a {
+   background-color: #EF6D3B;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdbdbdb', endColorstr='#ffe2e2e2', GradientType=0);
+  background-repeat: repeat-x;
+  -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 3px 9px rgba(0, 0, 0, .075);
+}
+.navbar-brand,
+.navbar-nav > li > a {
+  color:#F5F5F5;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
+}

@@ -69,6 +69,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		// Find a list of Usermaps
 		$scope.find = function() {
 			$scope.usermaps = Usermaps.query();
+			myUsermaps($scope.usermaps,$scope.authentication.user._id);
 		};
 
 		$scope.getCoord = function(){
@@ -137,5 +138,18 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				usermapId: $stateParams.usermapId
 			});
 		};
+
+		var myUsermaps = function(usermaps, LoginID){
+/*			console.log(usermaps);
+			console.log(LoginID);*/
+			$scope.myUserObj = [];
+			angular.forEach(usermaps,function(value){
+				if(usermaps.user._id === LoginID){
+					$scope.myUserObj.push(value);
+				}
+			});
+			console.log($scope.myUserObj);
+
+		}
 	}
 ]);

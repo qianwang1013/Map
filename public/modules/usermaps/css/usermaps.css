@@ -1,0 +1,11 @@
+.viewbox{
+	max-height: 480px;
+	overflow: scroll;
+}
+
+.viewcomment{
+	border-top: solid 1px #F5F5F5;
+	margin-top: 80px;
+	background-color: #93B1C6;
+	padding-top: 20px; 
+}
