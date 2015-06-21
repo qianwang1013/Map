@@ -27,7 +27,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
+				console.log('Is it here?');
+				/* jshint ignore:start */
+				toastr.error(response);
+				/* jshint ignore:end */
 				$scope.error = response.message;
+
 			});
 		};
 	}

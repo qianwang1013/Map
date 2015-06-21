@@ -1,6 +1,7 @@
 .viewbox{
 	max-height: 480px;
 	overflow: scroll;
+ 	overflow-x: hidden;
 }
 
 .viewcomment{

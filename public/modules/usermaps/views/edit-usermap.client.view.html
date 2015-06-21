@@ -1,4 +1,4 @@
-<section data-ng-controller="UsermapsController" data-ng-init="findOne()">
+<section data-ng-controller="UsermapsController" data-ng-init="findOne(); getCategory();">
     <div class="page-header">
         <h1>Edit Usermap</h1>
     </div>
@@ -6,10 +6,27 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
                     <div class="controls">
+                        Name:
                         <input type="text" data-ng-model="usermap.name" id="name" class="form-control" placeholder="Name" required>
+                     Longitude:
+                        <input type = "text" id = "longitude" data-ng-model = "usermap.lng" placeholder="longitude" class = "form-control"/>
+                        Latitude:
+                        <input type = "text" id = "latitude" data-ng-model = "usermap.lat" placeholder="latitude" class = "form-control"/>
+                        Notes:
+                        <input type = "text" id = "notes" data-ng-model = "usermap.notes" placeholder = "notes" class = "form-control"/>
+                        Link:
+                        <input type = "url" id = "link" data-ng-model = "usermap.link" placeholder = "hyperlink" class = "form-control"/>
+                        Description:
+                        <textarea data-ng-model="usermap.description" name="description" id="description" class="form-control" cols="30" rows="10" placeholder="description"></textarea>
+                        Marker Category:
+                        <select data-ng-model="usermap.category" id="category" name="category" class="form-control">
+                        <option data-ng-repeat = "category_name in categoryList" data-ng-hide="categoryList.length === 0 && category_name = ''" value="{{category_name}}">{{category_name}}</option>
+                        <option value="New Category"> --- New Category --- </option>
+                        </select>
+                         <input data-ng-show="usermap.category ==='New Category'" class="form-control" type="text" id = "new_category" data-ng-model="new_category" placeholder="New Category" />
                     </div>
+
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">

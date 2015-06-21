@@ -12,7 +12,11 @@ var mongoose = require('mongoose'),
  * Usermap Schema
  */
 var CommentSchema = new Schema({
-    user: {
+    fromUser: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
+    toUser:{
         type: Schema.ObjectId,
         ref: 'User'
     },

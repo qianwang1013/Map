@@ -23,14 +23,21 @@ angular.module('usermaps').factory('Comment',['$resource',
 	}
 ]);
 
-angular.module('usermaps').factory('Category', ['$resource',
-	function($resource){
-		var obj = $resource('/usermaps/getCategory');
-		console.log('I really want to know obj: ' + obj);
-		return obj;
-	}
-]);
+angular.module('usermaps').directive('jHeader',['$window', function($window){
+	return{
+		restrict: 'AE',
+		link: function(scope,el,attr){
+			$window.scroll(function(){
+				if(el.scrollTop() > 1){
+					el.addClass('fixed');
+				}
+				else{
+					el.removeClass('fixed');
+				}
+			});		
+		}	
+	};
 
-angular.module('usermaps').directive('jScroll',['',
+}
 	
 ]);

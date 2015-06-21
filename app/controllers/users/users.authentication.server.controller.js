@@ -51,8 +51,15 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
-		if (err || !user) {
-			res.status(400).send(info);
+		if (err || !user || (user.isUser === 0)) {
+			if(user.isUser ===  0){
+				console.log(info);
+			    var msg = 'Please wait for the admin';
+				res.status(403).send(msg);
+			}
+			else{
+				res.status(400).send(info);				
+			}
 		} else {
 			// Remove sensitive data before login
 			user.password = undefined;
@@ -203,4 +210,65 @@ exports.removeOAuthProvider = function(req, res, next) {
 			}
 		});
 	}
+};
+
+
+exports.list = function(req, res) { 
+/*	console.log('maybe here');*/
+	User.find().exec(function(err, users) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			console.log(users);
+			res.jsonp(users);
+		}
+	});
+};
+
+exports.accept = function(req, res) {
+	console.log(req.body.id);
+/*	User.find({'_id': req.body.id}).exec(function(err, user){
+		if(err){
+			console.log(err);
+			return res.status(400);
+		}else{
+			console.log(user);
+		}
+	});*/
+	User.update({'_id': req.body.id}, {$set:{'isUser' : 1}}).exec(function(err, users){
+		if(err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}else{
+			console.log(users);
+			res.jsonp(users);		
+		}
+	});
+
+};
+
+exports.deleUser = function(req, res) {
+	console.log(req.body.id);
+/*	User.find({'_id': req.body.id}).exec(function(err, user){
+		if(err){
+			console.log(err);
+			return res.status(400);
+		}else{
+			console.log(user);
+		}
+	});*/
+	User.remove({'_id': req.body.id}).exec(function(err, users){
+		if(err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}else{
+			console.log(users);
+			res.jsonp(users);		
+		}
+	});
+
 };

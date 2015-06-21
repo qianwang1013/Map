@@ -1,8 +1,8 @@
 'use strict';
 
 // Usermaps controller
-angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','Category','$http',
-	function($scope, $stateParams, $location, Authentication, Usermaps, test_Category, $http) {
+angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','$http',
+	function($scope, $stateParams, $location, Authentication, Usermaps, $http) {
 	/*	console.log(test)*/
 		$scope.authentication = Authentication;
 		$scope.center = {
@@ -11,6 +11,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				zoom: 12
 			};
 		$scope.layers = {};
+		var markerIcon = [];
 		// Create new Usermap
 		$scope.create = function() {
 			if(this.new_category !== '' && this.category === 'New Category'){
@@ -58,9 +59,9 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		// Update existing Usermap
 		$scope.update = function() {
 			var usermap = $scope.usermap;
-
+			$scope.usermap.category = $scope.new_category;
 			usermap.$update(function() {
-				$location.path('usermaps/' + usermap._id);
+				$location.path('usermaps');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -81,17 +82,22 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 					$scope.markers.push({
 						lat: res[i].lat,
 						lng: res[i].lng,
-						layer: res[i].layer
+						layer: res[i].layer,
+						icon: {}
 					});
-					
 				}
+
+				$scope.markers[1].icon ={
+					iconUrl: 'img/brand.png',
+                   	markerColor: 'red',
+                    iconSize:     [30, 30],
+                    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+				};
 				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
 			}).error(function (response) {
 				//console.log(response);
 			});
 		};
-
-
 		$scope.getCategory = function(){
 			$http.post('/usermaps/getCategory').success(function (res) {
 			$scope.categoryList = [];
@@ -116,7 +122,6 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
             };
 			$scope.layers.overlays = [];
 			//add layers
-			$scope.test_layers = ['Science', 'Foo'];
 			angular.forEach($scope.categoryList, function(value){
 				$scope.layers.overlays[value] = 
 					 {
@@ -150,6 +155,12 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 			});
 			console.log($scope.myUserObj);
 
-		}
+		};
+
+		var getDifMarker = function(){
+				var icon = {
+
+				};
+		};
 	}
 ]);

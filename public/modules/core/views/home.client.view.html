@@ -1,15 +1,13 @@
-<section data-ng-controller="HomeController">
-	<div class = "row">
-	<a href = "/#!/usermaps" ui-route = "/#!/usermaps"class = "btn btn-danger">MapApp</a>
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-md-offset-8">
-					<ul>
-						<li data-ng-repeat = "request in request_user"></li>
-
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+<section data-ng-controller="HomeController" data-ng-init = "findUser();">
+	
+	<ul class = "list-inline">
+		<li data-ng-repeat = "user in requestUsers" data-ng-show = "{{user.isUser}} == 0">
+			<span>{{user.displayName}}</span>
+			<br>
+			<span>{{user.email}}</span>
+			<br>
+			<button class = "btn btn-primary" data-ng-click = "accept(user._id)">Accept</button>
+			<button class = "btn btn-danger" data-ng-click = "deleUser(user._id)"> Decline</button>
+		</li>
+	</ul>
 </section>
