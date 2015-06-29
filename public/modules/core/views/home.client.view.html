@@ -1,5 +1,9 @@
 <section data-ng-controller="HomeController" data-ng-init = "findUser();">
 	
+	<div class = "userNotification" data-ng-hide = "requestUsers.length == 0">
+	<div data-ng-hide = "requestUsers.length == 0">
+		{{requestUsers.length}} has sign up to join since you last log in
+	</div>
 	<ul class = "list-inline">
 		<li data-ng-repeat = "user in requestUsers" data-ng-show = "{{user.isUser}} == 0">
 			<span>{{user.displayName}}</span>
@@ -10,4 +14,10 @@
 			<button class = "btn btn-danger" data-ng-click = "deleUser(user._id)"> Decline</button>
 		</li>
 	</ul>
+	</div>
+
+	<!-- Push Notifiction and check upon users -->
+	<btn class = "btn btn-lg">
+		<span class = "glyphicon glyphicon-user" data-ng-click = "showUser()">
+	</btn>
 </section>

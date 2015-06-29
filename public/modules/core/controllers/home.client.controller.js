@@ -1,18 +1,23 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Users', '$location', '$http',
-	function($scope, Authentication, Users, $location, $http) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Users', '$location', '$http', '$modal', '$log',
+	function($scope, Authentication, Users, $location, $http, $modal, $log) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
 
 		$scope.findUser = function(){
 			$scope.requestUsers = [];
+			$scope.allUser = [];
 			var users = $scope.users = Users.query();	
 			users.$promise.then(function success(data) {
 			  angular.forEach(data, function(value){
-			  	$scope.requestUsers.push(value);
+			  		$scope.allUser.push(value);
+				if(value.isUser === 0){
+					console.log(value);
+				  	$scope.requestUsers.push(value);
+				}
 			  });
 			}, function error(msg) {
 			  console.error(msg);
@@ -27,7 +32,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 			$http.post('/users/acce', arg).success(function (res) {
 				console.log(res);
 				$location.path('/');
+				/* jshint ignore: start  */
 				toastr.success( 'User successfully accept');
+				/* jshint ignore: end */
 			});
 		};
 
@@ -46,5 +53,37 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
 			});
 		};
+
+
+		/*Modal*/
+
+		  $scope.items = ['item1', 'item2', 'item3'];
+
+		  $scope.animationsEnabled = true;
+
+		  $scope.showUser = function (size) {
+
+		    var modalInstance = $modal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: 'modules/core/views/show.users.client.view.html',
+		      controller: 'HomeController',
+		      size: size,
+		      resolve: {
+		        items: function () {
+		          return $scope.items;
+		        }
+		      }
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $scope.selected = selectedItem;
+		    }, function () {
+		      $log.info('Modal dismissed at: ' + new Date());
+		    });
+		  };
+
+		  $scope.toggleAnimation = function () {
+		    $scope.animationsEnabled = !$scope.animationsEnabled;
+		  };
 	}
 ]);

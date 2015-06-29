@@ -8,7 +8,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		$scope.center = {
 				lat: 29.6520,
 				lng: -82.3250,
-				zoom: 12
+				zoom: 14
 			};
 		$scope.layers = {};
 		var markerIcon = [];
@@ -25,7 +25,8 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				description: this.description,
 				notes: this.notes,
 				link: this.link,
-				category: this.category
+				category: this.category,
+				color: this.color
 			});
 
 			// Redirect after save
@@ -58,6 +59,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 
 		// Update existing Usermap
 		$scope.update = function() {
+			console.log($scope.usermap);
 			var usermap = $scope.usermap;
 			$scope.usermap.category = $scope.new_category;
 			usermap.$update(function() {
@@ -79,20 +81,21 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				console.log('category ' + res);
 				for(var i = 0; i !== res.length; ++i){
 					
+					console.log(res);
 					$scope.markers.push({
 						lat: res[i].lat,
 						lng: res[i].lng,
 						layer: res[i].layer,
-						icon: {}
+						icon: {
+							type: 'extraMarker',
+	               		    icon: 'fa-star',
+                  		    markerColor: res[i].color,
+                    		prefix: 'fa',
+                    		shape: 'circle'
+						}
 					});
 				}
 
-				$scope.markers[1].icon ={
-					iconUrl: 'img/brand.png',
-                   	markerColor: 'red',
-                    iconSize:     [30, 30],
-                    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-				};
 				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
 			}).error(function (response) {
 				//console.log(response);
@@ -157,10 +160,5 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 
 		};
 
-		var getDifMarker = function(){
-				var icon = {
-
-				};
-		};
 	}
 ]);

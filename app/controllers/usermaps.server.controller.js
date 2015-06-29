@@ -119,7 +119,8 @@ exports.getCoord = function(req,res){
 				coord.push({
 						lat: usermaps[i].lat,
 						lng: usermaps[i].lng,
-						layer: usermaps[i].category
+						layer: usermaps[i].category,
+						color: usermaps[i].color
 					});
 				console.log(usermaps[i].category);
 			}

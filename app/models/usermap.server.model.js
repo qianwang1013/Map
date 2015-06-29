@@ -49,6 +49,11 @@ var UsermapSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
+	},
+	color:{
+		type: String, 
+		default: 'red',
+		trim: true
 	}
 });
 
