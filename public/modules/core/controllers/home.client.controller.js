@@ -6,10 +6,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
-
 		$scope.findUser = function(){
+			$scope.isCollapsed = false;
 			$scope.requestUsers = [];
-			$scope.allUser = [];
+			$scope.allUser = [];	
 			var users = $scope.users = Users.query();	
 			users.$promise.then(function success(data) {
 			  angular.forEach(data, function(value){
@@ -74,16 +74,29 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		        }
 		      }
 		    });
-
-		    modalInstance.result.then(function (selectedItem) {
-		      $scope.selected = selectedItem;
-		    }, function () {
-		      $log.info('Modal dismissed at: ' + new Date());
-		    });
 		  };
 
 		  $scope.toggleAnimation = function () {
 		    $scope.animationsEnabled = !$scope.animationsEnabled;
 		  };
+
+		  $scope.pushAll = function(allUser, emailContent){
+		  		var emailList = [];
+			    angular.forEach(allUser, function(user){
+			    	if(emailList.indexOf(user.email) === -1){
+						emailList.push(user.email);	    		
+			    	}
+
+				});
+			    var req = {};
+			    req.list = emailList;
+			    req.content = emailContent;
+			    console.log(req);
+		  		$http.post('core/sent', req).success(function(res){
+
+		  		});
+		  };
+
+
 	}
 ]);

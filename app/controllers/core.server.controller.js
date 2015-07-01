@@ -8,3 +8,8 @@ exports.index = function(req, res) {
 		request: req
 	});
 };
+
+exports.sent = function(req, res){
+	console.log(req.body);
+
+};

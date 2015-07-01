@@ -1,25 +1,51 @@
 
-<scetion ng-controller="HomeController">
+<scetion ng-controller="HomeController" data-ng-init = "findUser()">
         <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title">All Users</h3>
         </div>
+        <form data-ng-submit="pushSelected()" novalidate>
         <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
+            <fieldset>
+            <ul data-ng-repeat = "user in allUser" class = "container row list-inline">
+                <li class = "col col-xs-2">
+
+                        <ul class = "row list-inline container">
+                            <li class = "col-xs-4">
+                                {{user.displayName}}
+                            </li>
+                            <li class = "col-xs-4">
+                                {{user.email}}
+                            </li>
+                            <li class = "col-xs-1">
+                               <span data-ng-click = "deleUser(user._id)"class = "glyphicon glyphicon-trash"/>
+                            </li>
+
+                        </ul>   
+
                 </li>
             </ul>
-            Selected: <b>{{ selected.item }}</b>
         </div>
         <div class="modal-footer">
+            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Send out a Boardcast</button>
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
 
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
-    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-    <button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+            <div collapse = "!isCollapsed">
+                <div class="well well-lg">
+                <textarea data-ng-model = "emailContent" name="emailContent" id="emailContent" class="form-control" cols=100%  rows="10" placeholder="Enter your content here">
+                    
+                </textarea>
+             </div> 
+            <button class="btn btn-primary pull-right" ng-click="pushAll(allUser, emailContent)">Push All</button>
+        </div>
+        </div>
+        </fieldset>
+        </form>
+
+         
+
+
+            
+
 </section>
 

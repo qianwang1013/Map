@@ -25,8 +25,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 				description: this.description,
 				notes: this.notes,
 				link: this.link,
-				category: this.category,
-				color: this.color
+				category: this.category
 			});
 
 			// Redirect after save
@@ -78,22 +77,20 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		$scope.getCoord = function(){
 			$http.post('/usermaps/getCoord').success(function (res) {
 				$scope.markers = [];
-				console.log('category ' + res);
 				for(var i = 0; i !== res.length; ++i){
 					
 					console.log(res);
+					var thisIcon = markerType(res[i].layer);
 					$scope.markers.push({
 						lat: res[i].lat,
 						lng: res[i].lng,
 						layer: res[i].layer,
-						icon: {
-							type: 'extraMarker',
-	               		    icon: 'fa-star',
-                  		    markerColor: res[i].color,
-                    		prefix: 'fa',
-                    		shape: 'circle'
-						}
+						icon: thisIcon
 					});
+/*					console.log(res[i].layer);
+					console.log(markerType(res[i].layer));
+					$scope.markers.icon = markerType(res[i].layer);*/
+
 				}
 
 				//console.log('successful res ' + res[0].lat + 'my leagth: ' + res.length);
@@ -160,5 +157,44 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 
 		};
 
+		var markerType = function(category){
+			switch(category) {
+			    case 'HandsOn':
+					return {
+		                    iconUrl: '/modules/core/img/brand/icon.png',
+		                    iconSize:     [50, 45], // size of the icon
+		                    iconAnchor:   [22, 50], // point of the icon which will correspond to marker's location
+		                    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor						
+		                };	  
+		        case 'Physics' :
+		        	return {
+							type: 'extraMarker',
+	               		    icon: 'fa-star',
+                  		    markerColor: 'red',
+                    		prefix: 'fa',
+                    		shape: 'circle'		        		
+		        		};
+		        case 'Music' :
+		        	return {
+							type: 'extraMarker',
+	               		    icon: 'fa-star',
+                  		    markerColor: 'green',
+                    		prefix: 'fa',
+                    		shape: 'circle'			        		
+		        	};
+		        case 'Art' :
+		        	return{
+							type: 'extraMarker',
+	               		    icon: 'fa-star',
+                  		    markerColor: 'blue-dark',
+                    		prefix: 'fa',
+                    		shape: 'circle'
+		        	};
+			    default:
+			        return {
+			        };
+			    }
+		}; 
+		
 	}
 ]);

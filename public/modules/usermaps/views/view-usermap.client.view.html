@@ -33,19 +33,20 @@
 		</em>
 	</small>
 	<br>
+	<br>
 	<!-- Displaly longitude latitude and such -->
-	<p data-ng-show = "{{usermap.descrition}} !== """ class = "row container">
+	<p data-ng-show = usermap.description class = "row container">
 		{{usermap.description}}
 	</p>
-	<i data-ng-hide = "{{usermap.descrition}} !== """ class = "row container">
+	<i data-ng-hide = usermap.description class = "row container">
 		There is no description, would you like to add one?
 	</i>
 
-	<div data-ng-show = "{{usermap.link}} !== """ class = "row container">
+	<div data-ng-hide = usermap.link class = "row container">
 		<a href = {{usermap.link}}><i>{{usermap.notes}}</i></a>
 	</div>
 
-	<div data-ng-hide = "{{usermap.link}} !== """ class = "row container">
+	<div data-ng-show = usermap.link class = "row container">
 		<i>
 			There is no link, would you like to add one?
 		</i>
