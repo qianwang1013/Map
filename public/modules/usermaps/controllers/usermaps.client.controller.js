@@ -1,8 +1,8 @@
 'use strict';
 
 // Usermaps controller
-angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','$http',
-	function($scope, $stateParams, $location, Authentication, Usermaps, $http) {
+angular.module('usermaps').controller('UsermapsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Usermaps','$http','leafletData',
+	function($scope, $stateParams, $location, Authentication, Usermaps, $http, leafletData) {
 	/*	console.log(test)*/
 		$scope.authentication = Authentication;
 		$scope.center = {
@@ -72,6 +72,24 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		$scope.find = function() {
 			$scope.usermaps = Usermaps.query();
 			myUsermaps($scope.usermaps,$scope.authentication.user._id);
+		};
+
+	  $scope.getGPS = function() {
+            leafletData.getMap('map').then(function(map) {
+            console.log('clicked');
+
+            console.log(map);
+            map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true});
+            map.on('locationfound', function onLocationFound(e) {
+            	console.log(e);
+				$scope.markers.push({
+					lat: e.latitude,
+					lng: e.longitude,
+					message: 'You are here'
+				});        	
+            	var radius = e.accuracy / 2;
+     	 		});
+			});
 		};
 
 		$scope.getCoord = function(){
@@ -168,7 +186,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		                };	  
 		        case 'Physics' :
 		        	return {
-							type: 'extraMarker',
+							type: 'awesomeMarker',
 	               		    icon: 'fa-star',
                   		    markerColor: 'red',
                     		prefix: 'fa',
@@ -176,7 +194,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		        		};
 		        case 'Music' :
 		        	return {
-							type: 'extraMarker',
+							type: 'awesomeMarker',
 	               		    icon: 'fa-star',
                   		    markerColor: 'green',
                     		prefix: 'fa',
@@ -184,7 +202,7 @@ angular.module('usermaps').controller('UsermapsController', ['$scope', '$statePa
 		        	};
 		        case 'Art' :
 		        	return{
-							type: 'extraMarker',
+							type: 'awesomeMarker',
 	               		    icon: 'fa-star',
                   		    markerColor: 'blue-dark',
                     		prefix: 'fa',

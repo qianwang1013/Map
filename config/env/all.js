@@ -20,7 +20,8 @@ module.exports = {
 				'public/lib/leaflet.markercluster/dist/MarkerCluster.Default.css',
 				'public/lib/font-awesome/css/font-awesome.css',		
 				'public/lib/toastr/toastr.css',
-				'public/lib/angular-leaflet-directive/dist/leaflet.extra-markers.css'
+				'public/lib/angular-leaflet-directive/dist/leaflet.extra-markers.css',
+				'public/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css'
 			],
 			js: [
 				'public/lib/jquery/dist/jquery.js',
@@ -34,7 +35,8 @@ module.exports = {
 				'public/lib/leaflet.markercluster/dist/leaflet.markercluster.js',
 				'public/lib/toastr/toastr.js',
 				'public/lib/angular-leaflet-directive/dist/leaflet.extra-markers.js',
-				'public/lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js'
+				'public/lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js',
+				'public/lib/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js'
 			]
 		},
 		css: [
